@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-cpu-task
+  labels:
+    app: python-cpu-task
+spec:
+  replicas: 1  # Start with one replica
+  selector:
+    matchLabels:
+      app: python-cpu-task
+  template:
+    metadata:
+      labels:
+        app: python-cpu-task
+    spec:
+      containers:
+      - name: python-cpu-task
+        image: suhailaplha/cpu_task:v1
+        resources:
+          requests:
+            cpu: "500m"
+          limits:
+            cpu: "1"
+        ports:
+        - containerPort: 80
